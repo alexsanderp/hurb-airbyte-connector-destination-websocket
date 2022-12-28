@@ -46,4 +46,6 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t alexsanderp/hurb-airbyte-connector-destination-websocket:${{ needs.semantic_release.outputs.new_release_version }} .
+          docker tag alexsanderp/hurb-airbyte-connector-destination-websocket:${{ needs.semantic_release.outputs.new_release_version }} alexsanderp/hurb-airbyte-connector-destination-websocket:latest
           docker push alexsanderp/hurb-airbyte-connector-destination-websocket:${{ needs.semantic_release.outputs.new_release_version }}
+          docker push alexsanderp/hurb-airbyte-connector-destination-websocket:latest

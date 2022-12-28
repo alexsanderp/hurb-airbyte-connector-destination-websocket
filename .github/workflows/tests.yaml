@@ -1,0 +1,32 @@
+name: Tests
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Tests Dependencies
+        run: |
+          pip install .[tests]
+
+      - name: Run Unit Tests
+        run: |
+          python -m pytest unit_tests
+
+      - name: Run Integration Tests
+        run: |
+          python -m pytest integration_tests
+
+      - name: Test Build Docker Image
+        run: |
+          docker build -t alexsanderp/hurb-airbyte-connector-destination-websocket:test .
+
+      - name: Test Connection Spec
+        run: |
+          docker run --rm alexsanderp/hurb-airbyte-connector-destination-websocket:test spec

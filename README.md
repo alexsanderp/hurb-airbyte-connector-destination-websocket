@@ -89,6 +89,42 @@ docker run --rm -v $(pwd)/secrets:/secrets airbyte/destination-websocket:dev che
 cat integration_tests/messages.jsonl | docker run -i --rm -v $(pwd)/secrets:/secrets -v $(pwd)/integration_tests:/integration_tests airbyte/destination-websocket:dev write --config /secrets/config.json --catalog /integration_tests/configured_catalog.json
 ```
 
+### Locally using the connector in Airbyte (minikube)
+
+#### Prerequisites
+See https://github.com/alexsanderp/hurb-airbyte to run local airbyte in minikube.
+
+#### Build
+```
+docker build -t airbyte/destination-websocket:dev .
+```
+
+#### Using
+Run test WebSocketServer to receive data:
+```
+cd websocket_server/
+node websocket_server.js
+```
+
+Send docker image to minikube:
+```
+minikube image load airbyte/destination-websocket:dev
+```
+
+Go to airbyte url: http://localhost:8000
+
+Go to Settings > Destinations
+![img.png](images/1.png)
+
+Click in New connector and register the docker image
+![img.png](images/2.png)
+
+Now create a new destination with the websocket url of your WebSocketServer (ws://YOUR_MACHINE'S_IP:9000)
+Create a pipeline using any source and the new registered destination to test :)
+
+WebSocketServer output:
+![img.png](images/3.png)
+
 ## Testing
    Make sure to familiarize yourself with [pytest test discovery](https://docs.pytest.org/en/latest/goodpractices.html#test-discovery) to know how your test files and methods should be named.
 First install test dependencies into your virtual environment:

@@ -120,6 +120,7 @@ Click in New connector and register the docker image
 ![img.png](images/2.png)
 
 Now create a new destination with the websocket url of your WebSocketServer (ws://YOUR_MACHINE'S_IP:9000)
+
 Create a pipeline using any source and the new registered destination to test :)
 
 WebSocketServer output:

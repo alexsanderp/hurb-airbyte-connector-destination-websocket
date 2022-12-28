@@ -1,8 +1,6 @@
 {
   "documentationUrl": "https://docs.airbyte.com/integrations/destinations/websocket",
-  "supported_destination_sync_modes": [
-    "TODO, available options are: 'overwrite', 'append', and 'append_dedup'"
-  ],
+  "supported_destination_sync_modes": ["append"],
   "supportsIncremental": true,
   "supportsDBT": false,
   "supportsNormalization": false,
@@ -10,12 +8,17 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Destination Websocket",
     "type": "object",
-    "required": ["TODO -- fix me!"],
+    "required": ["websocket_url"],
     "additionalProperties": false,
     "properties": {
-      "TODO": {
+      "websocket_url": {
+        "title": "Websocket URL",
         "type": "string",
-        "description": "FIX ME"
+        "description": "URL of the Websocket",
+        "examples": [
+          "ws://localhost:8080"
+        ],
+        "order": 0
       }
     }
   }

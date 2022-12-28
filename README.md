@@ -13,7 +13,7 @@ For information about how to use this connector within Airbyte, see [the documen
 #### Build & Activate Virtual Environment and install dependencies
 From this connector directory, create a virtual environment:
 ```
-python -m venv .venv
+python3 -m venv .venv
 ```
 
 This will generate a virtualenv for this module in `.venv/`. Make sure this venv is active in your
@@ -48,8 +48,8 @@ and place them into `secrets/config.json`.
 ```
 python main.py spec
 python main.py check --config secrets/config.json
-python main.py discover --config secrets/config.json
-python main.py read --config secrets/config.json --catalog integration_tests/configured_catalog.json
+# messages.jsonl is a file containing line-separated JSON representing AirbyteMessages
+cat integration_tests/messages.jsonl | python main.py write --config secrets/config.json --catalog integration_tests/configured_catalog.json
 ```
 
 ### Locally running the connector docker image
@@ -73,7 +73,7 @@ Then run any of the connector commands as follows:
 docker run --rm airbyte/destination-websocket:dev spec
 docker run --rm -v $(pwd)/secrets:/secrets airbyte/destination-websocket:dev check --config /secrets/config.json
 # messages.jsonl is a file containing line-separated JSON representing AirbyteMessages
-cat messages.jsonl | docker run --rm -v $(pwd)/secrets:/secrets -v $(pwd)/integration_tests:/integration_tests airbyte/destination-websocket:dev write --config /secrets/config.json --catalog /integration_tests/configured_catalog.json
+cat integration_tests/messages.jsonl | docker run --rm -v $(pwd)/secrets:/secrets -v $(pwd)/integration_tests:/integration_tests airbyte/destination-websocket:dev write --config /secrets/config.json --catalog /integration_tests/configured_catalog.json
 ```
 ## Testing
    Make sure to familiarize yourself with [pytest test discovery](https://docs.pytest.org/en/latest/goodpractices.html#test-discovery) to know how your test files and methods should be named.

@@ -10,6 +10,8 @@ from airbyte_cdk import AirbyteLogger
 from airbyte_cdk.destinations import Destination
 from airbyte_cdk.models import AirbyteConnectionStatus, AirbyteMessage, ConfiguredAirbyteCatalog, Status, Type
 
+print("")  # force PR tests
+
 
 class DestinationWebsocket(Destination):
     def write(

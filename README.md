@@ -10,7 +10,7 @@ For information about how to use this connector within Airbyte, see [the documen
 
 #### Minimum Python version required `= 3.7.0`
 
-#### [TESTS with WebSocketServer] Minimum NodeJS version required `>=10.0.0`
+#### [TESTS with WebSocketServer] Minimum NodeJS version required `>= 10.0.0`
 ```
 cd websocket_server/
 npm install
